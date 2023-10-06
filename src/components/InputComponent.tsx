@@ -14,6 +14,7 @@ const InputComponent = ({
   nodeChildrenAmount,
 }: IInputProps) => {
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isConfirmed, setIsConfirmed] = useState(false);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -36,42 +37,72 @@ const InputComponent = ({
     <>
       <input
         ref={inputRef}
+        placeholder="Category name"
         value={name}
-        className={`w-32 h-10 px-1 m-1 my-4 text-center font-semibold select-none pointer-events-none ${
-          !isDisabled && ' select-auto pointer-events-auto'
+        className={`w-36 h-10 px-1 m-1 my-4 text-center font-semibold placeholder:font-light placeholder:text-neutral-200 select-none pointer-events-none ${
+          (!isDisabled || !isConfirmed) && 'select-auto pointer-events-auto'
         } ${
-          (id === 1 && ' border-dashed border-2 border-neutral-300') ||
-          (nodeChildrenAmount === 1 && 'bg-blue-400') ||
-          (nodeChildrenAmount === 2 && 'bg-neutral-400') ||
-          (nodeChildrenAmount >= 3 && 'bg-orange-400')
+          id === 1 && ' border-dashed border-2 border-neutral-300'
+          // (nodeChildrenAmount === 1 && 'bg-blue-400') ||
+          // (nodeChildrenAmount === 2 && 'bg-neutral-400') ||
+          // (nodeChildrenAmount >= 3 && 'bg-orange-400')
         }`}
         onChange={(e) => handleUpdateName(id, e.target.value)}
         onBlur={() => setIsDisabled(true)}
       />
 
       <div className=" flex gap-1 ml-2 relative">
-        <RoundedButton onClick={handleAddNodeClick}>+</RoundedButton>
-        <PopupDialog
-          id={id}
-          isOpenDialog={isOpenDialog}
-          setIsOpenDialog={setIsOpenDialog}
-          handleAddChildNode={handleAddChildNode}
-        />
-
-        {id !== 1 && (
+        {id !== 1 && !isConfirmed ? (
           <>
             <RoundedButton
-              onClick={handleEditClick}
-              className={`${!isDisabled && 'bg-neutral-500'}`}
+              className=" bg-yellow-300"
+              onClick={() => handleDeleteChildNode(id)}
             >
-              <Image src={'/pen.svg'} width={12} height={12} alt="edit" />
+              <Image src={'/cross.svg'} alt="delete" width={18} height={18} />
             </RoundedButton>
             <RoundedButton
-              onClick={() => handleDeleteChildNode(id)}
-              className=" bg-red-400"
+              className=" bg-green-400"
+              onClick={() => setIsConfirmed(true)}
             >
-              <Image src={'/cross.svg'} alt="delete" width={16} height={16} />
+              <Image
+                src={'/check-mark.svg'}
+                alt="delete"
+                width={12}
+                height={12}
+              />
             </RoundedButton>
+            <RoundedButton className="bg-transparent shadow-none" />
+          </>
+        ) : (
+          <>
+            <RoundedButton onClick={handleAddNodeClick}>+</RoundedButton>
+            <PopupDialog
+              id={id}
+              isOpenDialog={isOpenDialog}
+              setIsOpenDialog={setIsOpenDialog}
+              handleAddChildNode={handleAddChildNode}
+            />
+            {id !== 1 && (
+              <>
+                <RoundedButton
+                  onClick={handleEditClick}
+                  className={`${!isDisabled && 'bg-neutral-500'}`}
+                >
+                  <Image src={'/pen.svg'} width={12} height={12} alt="edit" />
+                </RoundedButton>
+                <RoundedButton
+                  onClick={() => handleDeleteChildNode(id)}
+                  className=" bg-red-400"
+                >
+                  <Image
+                    src={'/cross.svg'}
+                    alt="delete"
+                    width={16}
+                    height={16}
+                  />
+                </RoundedButton>
+              </>
+            )}
           </>
         )}
       </div>

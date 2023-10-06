@@ -16,7 +16,10 @@ const PopupDialog = ({
   return (
     <dialog
       open={isOpenDialog}
-      className=" text-center px-10 py-8 rounded-sm shadow-md absolute top-12 left-[-24px] z-10"
+      onMouseLeave={() => {
+        setIsOpenDialog(false);
+      }}
+      className=" text-center px-10 py-8 rounded-sm shadow-xl drop-shadow-xl absolute top-12 left-[-24px] z-10"
     >
       <span className=" w-4 h-4 bg-white absolute left-8 top-[-8px] rotate-45 rounded-sm " />
       <p className=" text-lg font-semibold whitespace-nowrap py-4">
