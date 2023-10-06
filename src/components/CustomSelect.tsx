@@ -1,16 +1,22 @@
 import MainButton from '@/shared/ui/Buttons/MainButton';
-import React, { useState } from 'react';
+import React, { Dispatch, useState } from 'react';
 
 interface ICustomSelectProps {
-  options: Array<string>;
-  defaultValue: string;
+  options: Array<number>;
+  defaultValue: number;
+  selectedValue: number;
+  setSelectedValue: Dispatch<React.SetStateAction<number>>;
 }
 
-function CustomSelect({ options, defaultValue }: ICustomSelectProps) {
-  const [selectedValue, setSelectedValue] = useState('');
+function CustomSelect({
+  options,
+  defaultValue,
+  selectedValue,
+  setSelectedValue,
+}: ICustomSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleSelect = (value: string) => {
+  const handleSelect = (value: number) => {
     setSelectedValue(value);
     setIsOpen(false);
   };
@@ -25,7 +31,7 @@ function CustomSelect({ options, defaultValue }: ICustomSelectProps) {
         className=" font-semibold text-neutral-400 w-16"
         onClick={toggleDropdown}
       >
-        {selectedValue || defaultValue}
+        {(selectedValue || defaultValue) + '%'}
       </MainButton>
       {isOpen && (
         <ul className=" absolute top-[40px]">
@@ -37,7 +43,7 @@ function CustomSelect({ options, defaultValue }: ICustomSelectProps) {
                   'text-purple-600'
                 }`}
               >
-                {option}
+                {option + '%'}
               </MainButton>
             </li>
           ))}
