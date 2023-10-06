@@ -66,7 +66,7 @@ const InputComponent = ({
                 height={12}
               />
             </RoundedButton>
-            <RoundedButton className="bg-transparent shadow-none" />
+            <RoundedButton className="bg-transparent shadow-none pointer-events-none" />
           </>
         ) : (
           <>
