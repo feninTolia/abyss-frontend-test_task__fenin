@@ -1,5 +1,6 @@
 'use client';
 import { IInputProps } from '@/shared/types';
+import MainButton from '@/shared/ui/Buttons/MainButton';
 import RoundedButton from '@/shared/ui/Buttons/RoundedButton';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
@@ -13,6 +14,8 @@ const InputComponent = ({
   nodeChildrenAmount,
 }: IInputProps) => {
   const [isDisabled, setIsDisabled] = useState(true);
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleEditClick = () => {
@@ -38,8 +41,36 @@ const InputComponent = ({
         onBlur={() => setIsDisabled(true)}
       />
 
-      <div className=" flex gap-1 ml-2">
-        <RoundedButton onClick={() => handleAddChildNode(id)}>+</RoundedButton>
+      <div className=" flex gap-1 ml-2 relative">
+        <RoundedButton onClick={() => setIsOpenDialog(true)}>+</RoundedButton>
+
+        <dialog
+          open={isOpenDialog}
+          className=" text-center px-8 py-12 rounded-sm shadow-md absolute top-12 left-[-24px] z-10"
+        >
+          <span className=" w-4 h-4 bg-white absolute left-8 top-[-8px] rotate-45" />
+          <p className=" text-xl font-semibold whitespace-nowrap">
+            What do you want to create?
+          </p>
+          <div className=" flex justify-center gap-2 mt-4">
+            <MainButton
+              onClick={() => {
+                handleAddChildNode(id);
+                setIsOpenDialog(false);
+              }}
+            >
+              CATEGORIES
+            </MainButton>
+            <MainButton
+              onClick={() => {
+                handleAddChildNode(id);
+                setIsOpenDialog(false);
+              }}
+            >
+              SERVICES
+            </MainButton>
+          </div>
+        </dialog>
 
         {id !== 1 && (
           <>
