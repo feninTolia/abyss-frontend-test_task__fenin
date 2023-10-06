@@ -56,7 +56,7 @@ const InputComponent = ({
               <Image src={'/cross.svg'} alt="delete" width={18} height={18} />
             </RoundedButton>
             <RoundedButton
-              className=" bg-green-400"
+              className="bg-green-300"
               onClick={() => setIsConfirmed(true)}
             >
               <Image
@@ -66,7 +66,10 @@ const InputComponent = ({
                 height={12}
               />
             </RoundedButton>
-            <RoundedButton className="bg-transparent shadow-none pointer-events-none" />
+            <RoundedButton
+              className="bg-transparent shadow-none pointer-events-none"
+              style={{ boxShadow: 'none' }}
+            />
           </>
         ) : (
           <>
