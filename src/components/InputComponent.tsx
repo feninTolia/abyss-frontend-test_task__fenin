@@ -24,6 +24,14 @@ const InputComponent = ({
     inputRef?.current.focus();
   };
 
+  const handleAddNodeClick = () => {
+    if (id === 1) {
+      handleAddChildNode(id);
+      return;
+    }
+    setIsOpenDialog(true);
+  };
+
   return (
     <>
       <input
@@ -42,7 +50,7 @@ const InputComponent = ({
       />
 
       <div className=" flex gap-1 ml-2 relative">
-        <RoundedButton onClick={() => setIsOpenDialog(true)}>+</RoundedButton>
+        <RoundedButton onClick={handleAddNodeClick}>+</RoundedButton>
         <PopupDialog
           id={id}
           isOpenDialog={isOpenDialog}
