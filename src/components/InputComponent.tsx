@@ -56,7 +56,7 @@ const InputComponent = ({
               <Image src={'/cross.svg'} alt="delete" width={18} height={18} />
             </RoundedButton>
             <RoundedButton
-              className="bg-green-300"
+              style={{ backgroundColor: 'lightgreen' }}
               onClick={() => setIsConfirmed(true)}
             >
               <Image
