@@ -1,5 +1,7 @@
 import MainButton from '@/shared/ui/Buttons/MainButton';
 import React from 'react';
+import CustomSelect from './CustomSelect';
+import { zoomOptions } from '@/shared/constants';
 
 const ZoomGroup = () => {
   return (
@@ -7,7 +9,7 @@ const ZoomGroup = () => {
       <MainButton className="text-xl font-semibold text-neutral-400">
         -
       </MainButton>
-      <MainButton className="font-semibold text-neutral-400">100%</MainButton>
+      <CustomSelect options={zoomOptions} defaultValue="100%" />
       <MainButton className="text-xl font-semibold text-neutral-400">
         +
       </MainButton>
