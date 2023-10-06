@@ -1,18 +1,19 @@
 'use client';
 import MainButton from '@/shared/ui/Buttons/MainButton';
-import React, { useState } from 'react';
+import React from 'react';
 import CustomSelect from './CustomSelect';
 import { zoomOptions } from '@/shared/constants';
+import { useZoomContext } from '@/shared/context/ZoomContext';
 
 const ZoomGroup = () => {
-  const [selectedValue, setSelectedValue] = useState(100);
+  const { zoom, setZoom } = useZoomContext();
 
   return (
     <div className=" flex gap-0.5">
       <MainButton
         onClick={() => {
-          if (selectedValue < 25) return;
-          setSelectedValue((prev) => prev - 10);
+          if (zoom < 25) return;
+          setZoom((prev) => prev - 10);
         }}
         className="text-xl font-semibold text-neutral-400"
       >
@@ -21,13 +22,13 @@ const ZoomGroup = () => {
       <CustomSelect
         options={zoomOptions}
         defaultValue={100}
-        selectedValue={selectedValue}
-        setSelectedValue={setSelectedValue}
+        selectedValue={zoom}
+        setSelectedValue={setZoom}
       />
       <MainButton
         onClick={() => {
-          if (selectedValue > 150) return;
-          setSelectedValue((prev) => prev + 10);
+          if (zoom > 150) return;
+          setZoom((prev) => prev + 10);
         }}
         className="text-xl font-semibold text-neutral-400"
       >

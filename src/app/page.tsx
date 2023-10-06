@@ -2,6 +2,7 @@
 import DragMove from '@/components/DragMove';
 import Header from '@/components/Header';
 import TreeNode from '@/components/TreeNode';
+import { useZoomContext } from '@/shared/context/ZoomContext';
 import { INode } from '@/shared/types';
 import { useState } from 'react';
 
@@ -17,6 +18,7 @@ export default function Home() {
     x: 0,
     y: 0,
   });
+  const { zoom } = useZoomContext();
 
   const handleDragMove = (e: React.PointerEvent<HTMLDivElement>) => {
     setTranslate({
@@ -34,6 +36,7 @@ export default function Home() {
           <div
             style={{
               transform: `translateX(${translate.x}px) translateY(${translate.y}px)`,
+              scale: zoom / 100,
             }}
           >
             {treeData && <TreeNode node={treeData} setTreeData={setTreeData} />}
