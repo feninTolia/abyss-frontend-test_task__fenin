@@ -11,7 +11,6 @@ const InputComponent = ({
   handleAddChildNode,
   handleUpdateName,
   handleDeleteChildNode,
-  nodeChildrenAmount,
 }: IInputProps) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [isConfirmed, setIsConfirmed] = useState(false);
@@ -42,12 +41,7 @@ const InputComponent = ({
         className={`w-36 h-10 px-1 m-1 my-4 text-center font-semibold placeholder:font-light placeholder:text-neutral-200 select-none pointer-events-none ${
           (!isDisabled || (!isConfirmed && id !== 1)) &&
           'select-auto pointer-events-auto'
-        } ${
-          id === 1 && ' border-dashed border-2 border-neutral-300'
-          // (nodeChildrenAmount === 1 && 'bg-blue-400') ||
-          // (nodeChildrenAmount === 2 && 'bg-neutral-400') ||
-          // (nodeChildrenAmount >= 3 && 'bg-orange-400')
-        }`}
+        } ${id === 1 && ' border-dashed border-2 border-neutral-300'}`}
         onChange={(e) => handleUpdateName(id, e.target.value)}
         onBlur={() => setIsDisabled(true)}
       />
