@@ -40,7 +40,8 @@ const InputComponent = ({
         placeholder="Category name"
         value={name}
         className={`w-36 h-10 px-1 m-1 my-4 text-center font-semibold placeholder:font-light placeholder:text-neutral-200 select-none pointer-events-none ${
-          (!isDisabled || !isConfirmed) && 'select-auto pointer-events-auto'
+          (!isDisabled || (!isConfirmed && id !== 1)) &&
+          'select-auto pointer-events-auto'
         } ${
           id === 1 && ' border-dashed border-2 border-neutral-300'
           // (nodeChildrenAmount === 1 && 'bg-blue-400') ||
