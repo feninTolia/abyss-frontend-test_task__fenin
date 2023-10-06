@@ -43,3 +43,10 @@ export interface INodeComponentProps {
   childrenAmount: number;
   setTreeData: Dispatch<SetStateAction<INode>>;
 }
+
+export interface IPopupDialogProps {
+  id: number;
+  isOpenDialog: boolean;
+  setIsOpenDialog: Dispatch<React.SetStateAction<boolean>>;
+  handleAddChildNode: (id: number) => void;
+}

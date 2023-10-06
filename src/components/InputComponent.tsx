@@ -1,9 +1,9 @@
 'use client';
 import { IInputProps } from '@/shared/types';
-import MainButton from '@/shared/ui/Buttons/MainButton';
 import RoundedButton from '@/shared/ui/Buttons/RoundedButton';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
+import PopupDialog from './PopupDialog';
 
 const InputComponent = ({
   id,
@@ -43,34 +43,12 @@ const InputComponent = ({
 
       <div className=" flex gap-1 ml-2 relative">
         <RoundedButton onClick={() => setIsOpenDialog(true)}>+</RoundedButton>
-
-        <dialog
-          open={isOpenDialog}
-          className=" text-center px-8 py-12 rounded-sm shadow-md absolute top-12 left-[-24px] z-10"
-        >
-          <span className=" w-4 h-4 bg-white absolute left-8 top-[-8px] rotate-45" />
-          <p className=" text-xl font-semibold whitespace-nowrap">
-            What do you want to create?
-          </p>
-          <div className=" flex justify-center gap-2 mt-4">
-            <MainButton
-              onClick={() => {
-                handleAddChildNode(id);
-                setIsOpenDialog(false);
-              }}
-            >
-              CATEGORIES
-            </MainButton>
-            <MainButton
-              onClick={() => {
-                handleAddChildNode(id);
-                setIsOpenDialog(false);
-              }}
-            >
-              SERVICES
-            </MainButton>
-          </div>
-        </dialog>
+        <PopupDialog
+          id={id}
+          isOpenDialog={isOpenDialog}
+          setIsOpenDialog={setIsOpenDialog}
+          handleAddChildNode={handleAddChildNode}
+        />
 
         {id !== 1 && (
           <>
